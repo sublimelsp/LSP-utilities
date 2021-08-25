@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Client Handlers &mdash; lsp_utils  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Server Resource Handlers" href="server_resource_handlers.html" />
+    <link rel="prev" title="lsp_utils" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> lsp_utils
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Client Handlers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#genericclienthandler">GenericClientHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#npmclienthandler">NpmClientHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipclienthandler">PipClientHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="server_resource_handlers.html">Server Resource Handlers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="server_resource_handlers.html#serverstatus">ServerStatus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_resource_handlers.html#serverresourceinterface">ServerResourceInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_resource_handlers.html#serverpipresource">ServerPipResource</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_handler.html">API Handler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_handler.html#apiwrapperinterface">ApiWrapperInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_handler.html#api-decorators">API Decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">lsp_utils</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Client Handlers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/sublimelsp/lsp_utils/blob/master/docs/source/client_handlers.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="client-handlers">
+<h1>Client Handlers<a class="headerlink" href="#client-handlers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="genericclienthandler">
+<h2>GenericClientHandler<a class="headerlink" href="#genericclienthandler" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">lsp_utils.</span></span><span class="sig-name descname"><span class="pre">GenericClientHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>An generic implementation of an LSP plugin handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – </p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.package_name">
+<span class="sig-name descname"><span class="pre">package_name</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#lsp_utils.GenericClientHandler.package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the released package. Also used for the name of the LSP client and for reading package settings.</p>
+<p>This name must be set and must match the basename of the corresponding <cite>*.sublime-settings</cite> file.
+It’s also used as a directory name for package storage when implementing a server resource interface.
+Recommended to use <cite>__package__</cite> value fo this one. If you need to override handler name in the UI,
+override <a class="reference internal" href="#lsp_utils.GenericClientHandler.get_displayed_name" title="lsp_utils.GenericClientHandler.get_displayed_name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_displayed_name()</span></code></a> also.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Required</dt>
+<dd class="field-odd"><p>Yes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.get_displayed_name">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_displayed_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.get_displayed_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name that will be shown in the ST UI (for example in the status field).</p>
+<p>Defaults to the value of <a class="reference internal" href="#lsp_utils.GenericClientHandler.package_name" title="lsp_utils.GenericClientHandler.package_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">package_name</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.storage_path">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">storage_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.storage_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The storage path. Use this as your base directory to install server files. Its path is ‘$DATA/Package Storage’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.package_storage">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">package_storage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.package_storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The storage path for this package. Its path is ‘$DATA/Package Storage/[Package_Name]’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.get_command">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_command</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.get_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of arguments to use to start the server. The default implementation returns combined result of
+<a class="reference internal" href="#lsp_utils.GenericClientHandler.binary_path" title="lsp_utils.GenericClientHandler.binary_path"><code class="xref py py-meth docutils literal notranslate"><span class="pre">binary_path()</span></code></a> and <a class="reference internal" href="#lsp_utils.GenericClientHandler.get_binary_arguments" title="lsp_utils.GenericClientHandler.get_binary_arguments"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_binary_arguments()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.binary_path">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">binary_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.binary_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filesystem path to the server executable.</p>
+<p>The default implementation returns <cite>binary_path</cite> property of the server instance (returned from
+<a class="reference internal" href="#lsp_utils.GenericClientHandler.get_server" title="lsp_utils.GenericClientHandler.get_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_server()</span></code></a>), if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.get_binary_arguments">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_binary_arguments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.get_binary_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of extra arguments to append to the <cite>command</cite> when starting the server.</p>
+<p>See <a class="reference internal" href="#lsp_utils.GenericClientHandler.get_command" title="lsp_utils.GenericClientHandler.get_command"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_command()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.get_additional_variables">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_additional_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.get_additional_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override to add more variables here to be expanded when reading settings.</p>
+<p>Default implementation adds a <cite>${server_path}</cite> variable that holds filesystem path to the server
+binary (only when <a class="reference internal" href="#lsp_utils.GenericClientHandler.manages_server" title="lsp_utils.GenericClientHandler.manages_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">manages_server()</span></code></a> is <cite>True</cite>).</p>
+<p>Remember to call the super class and merge the results if overriding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.get_additional_paths">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_additional_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.get_additional_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override to prepend additional paths to the default PATH environment variable.</p>
+<p>Remember to call the super class and merge the results if overriding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.manages_server">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">manages_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.manages_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether this handler manages a server. If the response is <cite>True</cite> then the <a class="reference internal" href="#lsp_utils.GenericClientHandler.get_server" title="lsp_utils.GenericClientHandler.get_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_server()</span></code></a> should also be
+implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.get_server">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.get_server" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="server_resource_handlers.html#lsp_utils.ServerResourceInterface" title="lsp_utils.server_resource_interface.ServerResourceInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerResourceInterface</span></code></a>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The instance of the server managed by this plugin. Only used when <a class="reference internal" href="#lsp_utils.GenericClientHandler.manages_server" title="lsp_utils.GenericClientHandler.manages_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">manages_server()</span></code></a>
+returns <cite>True</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.on_settings_read">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">on_settings_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.on_settings_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when package settings were read. Receives a <cite>sublime.Settings</cite> object.</p>
+<p>It’s recommended to use <a class="reference internal" href="#lsp_utils.GenericClientHandler.on_settings_changed" title="lsp_utils.GenericClientHandler.on_settings_changed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_settings_changed()</span></code></a> instead if you don’t need to persistent your changes to
+the disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite> to save modifications back into the settings file.</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>settings</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.on_client_configuration_ready">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">on_client_configuration_ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.on_client_configuration_ready" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.8: </span>Use <a class="reference internal" href="#lsp_utils.GenericClientHandler.on_settings_changed" title="lsp_utils.GenericClientHandler.on_settings_changed"><code class="xref py py-func docutils literal notranslate"><span class="pre">on_settings_changed()</span></code></a> instead.</p>
+</div>
+<p>Called with default configuration object that contains merged default and user settings.</p>
+<p>Can be used to alter default configuration before registering it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>configuration</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.is_allowed_to_start">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">is_allowed_to_start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initiating_view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace_folders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.is_allowed_to_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if the session is allowed to start.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string describing the reason why we should not start a language server session, or <cite>None</cite> if we
+should go ahead and start a session.</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code>) – </p></li>
+<li><p><strong>initiating_view</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code>]) – </p></li>
+<li><p><strong>workspace_folders</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">WorkspaceFolder</span></code>]]) – </p></li>
+<li><p><strong>configuration</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ClientConfig</span></code>]) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.on_ready">
+<span class="sig-name descname"><span class="pre">on_ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.on_ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the instance is ready.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api</strong> (<a class="reference internal" href="api_handler.html#lsp_utils.ApiWrapperInterface" title="lsp_utils.api_wrapper_interface.ApiWrapperInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiWrapperInterface</span></code></a>) – The API instance for interacting with the server.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.GenericClientHandler.on_settings_changed">
+<span class="sig-name descname"><span class="pre">on_settings_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.GenericClientHandler.on_settings_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to alter the settings that are returned to the server for the
+workspace/didChangeConfiguration notification and the workspace/configuration requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>settings</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DottedDict</span></code>) – The settings that the server should receive.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="npmclienthandler">
+<h2>NpmClientHandler<a class="headerlink" href="#npmclienthandler" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lsp_utils.NpmClientHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">lsp_utils.</span></span><span class="sig-name descname"><span class="pre">NpmClientHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.NpmClientHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>An implementation of <a class="reference internal" href="#lsp_utils.GenericClientHandler" title="lsp_utils.GenericClientHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericClientHandler</span></code></a> for handling NPM-based LSP plugins.</p>
+<p>Automatically manages an NPM-based server by installing and updating it in the package storage directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – </p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lsp_utils.NpmClientHandler.server_directory">
+<span class="sig-name descname"><span class="pre">server_directory</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#lsp_utils.NpmClientHandler.server_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the server source directory, relative to the root directory of this package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Required</dt>
+<dd class="field-odd"><p>Yes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lsp_utils.NpmClientHandler.server_binary_path">
+<span class="sig-name descname"><span class="pre">server_binary_path</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#lsp_utils.NpmClientHandler.server_binary_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the server “binary”, relative to plugin’s storage directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Required</dt>
+<dd class="field-odd"><p>Yes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.NpmClientHandler.minimum_node_version">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">minimum_node_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.NpmClientHandler.minimum_node_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>The minimum Node version required for this plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The semantic version tuple with the minimum required version. Defaults to <code class="code docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lsp_utils.NpmClientHandler.get_additional_variables">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_additional_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.NpmClientHandler.get_additional_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overrides <a class="reference internal" href="#lsp_utils.GenericClientHandler.get_additional_variables" title="lsp_utils.GenericClientHandler.get_additional_variables"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GenericClientHandler.get_additional_variables()</span></code></a>, providing additional variable for use in the
+settings.</p>
+<p>The additional variables are:</p>
+<ul class="simple">
+<li><p><cite>${node_bin}</cite>: - holds the binary path of currently used Node.js runtime. This can resolve to just <cite>node</cite>
+when using Node.js runtime from the PATH or to a full filesystem path if using the local Node.js runtime.</p></li>
+<li><p><cite>${server_directory_path}</cite> - holds filesystem path to the server directory (only
+when <a class="reference internal" href="#lsp_utils.GenericClientHandler.manages_server" title="lsp_utils.GenericClientHandler.manages_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GenericClientHandler.manages_server()</span></code></a> is <cite>True</cite>).</p></li>
+</ul>
+<p>Remember to call the super class and merge the results if overriding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="pipclienthandler">
+<h2>PipClientHandler<a class="headerlink" href="#pipclienthandler" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lsp_utils.pip_client_handler.PipClientHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">lsp_utils.pip_client_handler.</span></span><span class="sig-name descname"><span class="pre">PipClientHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lsp_utils.pip_client_handler.PipClientHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>An implementation of <code class="xref py py-class docutils literal notranslate"><span class="pre">GenericClientHandler</span></code> for handling pip-based LSP plugins.</p>
+<p>Automatically manages a pip-based server by installing and updating dependencies based on provided
+<cite>requirements.txt</cite> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – </p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lsp_utils.pip_client_handler.PipClientHandler.requirements_txt_path">
+<span class="sig-name descname"><span class="pre">requirements_txt_path</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#lsp_utils.pip_client_handler.PipClientHandler.requirements_txt_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the <cite>requirements.txt</cite> file containing a list of dependencies required by the server.</p>
+<p>If the package <cite>LSP-foo</cite> has a <cite>requirements.txt</cite> file at the root then the path will be just <cite>requirements.txt</cite>.</p>
+<p>The file format is <cite>dependency_name==dependency_version</cite> or just a direct path to the dependency (for example to
+a github repo). For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyls</span><span class="o">==</span><span class="mf">0.1.2</span>
+<span class="n">colorama</span><span class="o">==</span><span class="mf">1.2.2</span>
+<span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tomv564</span><span class="o">/</span><span class="n">pyls</span><span class="o">-</span><span class="n">mypy</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Required</dt>
+<dd class="field-odd"><p>Yes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lsp_utils.pip_client_handler.PipClientHandler.server_filename">
+<span class="sig-name descname"><span class="pre">server_filename</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#lsp_utils.pip_client_handler.PipClientHandler.server_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>The file name of the binary used to start the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Required</dt>
+<dd class="field-odd"><p>Yes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="server_resource_handlers.html" class="btn btn-neutral float-right" title="Server Resource Handlers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="lsp_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, SublimeLSP.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
