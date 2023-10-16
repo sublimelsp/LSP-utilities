@@ -3,16 +3,10 @@ name: main
 on:
   push:
     branches:
-      - main
-    paths-ignore:
-      - ".github/workflows/docs.yml"
-      - "docs/**"
+      - st3
   pull_request:
     branches:
-      - main
-    paths-ignore:
-      - ".github/workflows/docs.yml"
-      - "docs/**"
+      - st3
 
 jobs:
   Unittesting:
@@ -27,14 +21,18 @@ jobs:
         with:
           node-version: '18'
       - uses: actions/checkout@v4
+      - if: ${{ matrix.os == 'ubuntu-latest' && matrix.sublime-text.version == '3' }}
+        run: |
+          sudo apt update
+          sudo apt install at-spi2-core
       - if: ${{ matrix.os == 'macOS-latest' }}
         run: brew unlink openssl
       - uses: SublimeText/UnitTesting/actions/setup@v1
         with:
-          sublime-text-version: 4
+          sublime-text-version: 3
           extra-packages: |
-            sublimelsp/LSP@main
-            sublimelsp/LSP-pyright@master
+            sublimelsp/LSP@st3
+            sublimelsp/LSP-pyright@st3
       - uses: SublimeText/UnitTesting/actions/run-tests@v1
 
   Lint:
