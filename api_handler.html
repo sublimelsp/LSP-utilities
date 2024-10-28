@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Handler &mdash; lsp_utils  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Utilities" href="utilities.html" />
+    <link rel="prev" title="Server Resource Handlers" href="server_resource_handlers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            lsp_utils
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="client_handlers.html">Client Handlers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="client_handlers.html#genericclienthandler">GenericClientHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_handlers.html#npmclienthandler">NpmClientHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_handlers.html#pipclienthandler">PipClientHandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="server_resource_handlers.html">Server Resource Handlers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="server_resource_handlers.html#serverstatus">ServerStatus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_resource_handlers.html#serverresourceinterface">ServerResourceInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_resource_handlers.html#serverpipresource">ServerPipResource</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Handler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#apiwrapperinterface">ApiWrapperInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-decorators">API Decorators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">lsp_utils</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Handler</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/sublimelsp/lsp_utils/blob/master/docs/source/api_handler.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-handler">
+<h1>API Handler<a class="headerlink" href="#api-handler" title="Link to this heading"></a></h1>
+<section id="apiwrapperinterface">
+<h2>ApiWrapperInterface<a class="headerlink" href="#apiwrapperinterface" title="Link to this heading"></a></h2>
+</section>
+<section id="api-decorators">
+<h2>API Decorators<a class="headerlink" href="#api-decorators" title="Link to this heading"></a></h2>
+<p>Decorators can be used as an alternative to attaching listeners to the <code class="xref py py-class docutils literal notranslate"><span class="pre">lsp_utils.ApiWrapperInterface</span></code> instance obtained through <code class="xref py py-meth docutils literal notranslate"><span class="pre">lsp_utils.GenericClientHandler.on_ready()</span></code>.</p>
+<p>To use, attach the decorator to a function and call it with the name of the notification or the request that you want to handle. It can also be called with a list of names, if you want to use the same handler to handle multiple requests.</p>
+<p>Example usage:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="nd">@notification_handler</span><span class="p">(</span><span class="s1">&#39;eslint/status&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handle_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+<span class="nd">@request_handler</span><span class="p">(</span><span class="s1">&#39;eslint/openDoc&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handle_open_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">respond</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">])</span>
+    <span class="n">respond</span><span class="p">({})</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="server_resource_handlers.html" class="btn btn-neutral float-left" title="Server Resource Handlers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilities.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, SublimeLSP.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
