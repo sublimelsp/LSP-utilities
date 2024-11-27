@@ -94,6 +94,11 @@ class NodeRuntime:
                 except Exception as ex:
                     log_lines.append(' * Binaries check failed: {}'.format(ex))
                     if selected_runtimes[0] != 'local':
+                        lsp_cfg = sublime.load_settings('LSP.sublime-settings')
+                        suppress_error_dialogs = cast(bool, lsp_cfg.get('suppress_error_dialogs') or False)
+                        if suppress_error_dialogs:
+                            log_lines.append(' * Download auto-skipped due to "suppress_error_dialogs" setting')
+                            continue
                         if not sublime.ok_cancel_dialog(
                                 NO_NODE_FOUND_MESSAGE.format(package_name=package_name), 'Download Node.js'):
                             log_lines.append(' * Download skipped')
